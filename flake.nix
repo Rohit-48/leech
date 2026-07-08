@@ -31,7 +31,20 @@
             bacon
             cargo-watch
 
+            tcpdump
+            wireshark
+            dnsutils
+            rustfmt
+            clippy
+
+            libpcap
+            pkg-config
+
           ];
+          shellHook = ''
+            export PKG_CONFIG_PATH="${pkgs.libpcap}/lib/pkgconfig:$PKG_CONFIG_PATH"
+            echo "leech dev shell ready. libpcap: ${pkgs.libpcap}"
+          '';
 
         };
       });
