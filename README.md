@@ -35,3 +35,8 @@ Open a browser tab or `curl` something in another terminal while this runs — y
 3. Firewall/VPN swallowing traffic before it hits the interface?
 
 Next up: Milestone 2 — parse these packets into actual domain names instead of just byte counts.
+
+# notes
+Packet capture works differently. It taps the NIC at a lower level and asks it to hand over a copy of every packet passing through — not just packets meant for your process. That's what promiscuous mode means: the NIC normally filters out anything not addressed to it (by MAC address), and promiscuous mode tells it "stop filtering, give me everything you see, even traffic addressed to other d
+
+Phantom types are a design pattern where a type has a generic parameter that is not used in its fields. They exist only at compile-time to enforce type safety and state constraints without adding any memory or performance overhead at runtime.
