@@ -17,4 +17,4 @@ So instead of your machine's network chatter being invisible, you get a live fee
 The actual "crazy" part of the idea, most simple network tools show you traffic, but connecting it back to a specific running process is the genuinely hard, systems-level puzzle we're solving.
 
 **Note**
-Why bother building it? Real talk -- it's not solving world hunger or cancer, it's a learning project. It forces you through actual Linux networking internals, Rust systems programming, and process/socket internals, stuff that pays off way beyond this one tool, especially with your Cisco/networking goals.
+Why bother building it? Real talk -- it's not solving world hunger or cancer, it's a learning project. It forces you through actual Linux networking internals, Rust systems programming, and process/socket internals.
