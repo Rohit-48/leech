@@ -1,42 +1,20 @@
-# leech — Milestone 1
+# leech
+**what is leech?** <br>
+You know how your laptop is constantly "phoning home",  apps checking for updates, ads loading, some background service pinging a server you've never heard of? Right now, you have basically zero visibility into that. It's happening silently, all the time, and you'd need to be a network wizard to see it.
+leech is a live dashboard, right in your terminal, that shows you exactly that, in real time.
 
-Raw packet capture. Proves you can see UDP/53 traffic. No parsing yet — that's Milestone 2.
+Something like:
 
-## Run it
-
-```bash
-nix develop        # drops you into the dev shell with libpcap + rust
-cargo build
+```
+Process       Domain                  Time
+firefox       google.com              12:03:41
+spotify       spclient.wg.spotify.com 12:03:42
+some-daemon   sketchy-tracker.io      12:03:44
 ```
 
-Capturing raw packets needs elevated perms. Two options:
+So instead of your machine's network chatter being invisible, you get a live feed of who's talking to the internet and where.
 
-**Option A — just use sudo (fastest for testing):**
-```bash
-sudo ./target/debug/leech
-```
+The actual "crazy" part of the idea, most simple network tools show you traffic, but connecting it back to a specific running process is the genuinely hard, systems-level puzzle we're solving.
 
-**Option B — set capabilities on the binary (no sudo needed after this):**
-```bash
-sudo setcap cap_net_raw,cap_net_admin=eip ./target/debug/leech
-./target/debug/leech
-```
-
-## What "done" looks like for M1
-
-- Program lists your network devices
-- Picks the default one (or you hardcode one if `Device::lookup()` grabs the wrong interface — check the printed list)
-- Opens a capture filtered to `udp port 53`
-- Prints a line every time a DNS packet crosses the wire, with timestamp + byte length
-
-Open a browser tab or `curl` something in another terminal while this runs — you should see packets flowing. If nothing prints, check:
-1. Right interface? (wifi vs ethernet vs loopback — DNS from your own machine usually isn't loopback, it's your actual NIC)
-2. Permissions actually applied?
-3. Firewall/VPN swallowing traffic before it hits the interface?
-
-Next up: Milestone 2 — parse these packets into actual domain names instead of just byte counts.
-
-# notes
-Packet capture works differently. It taps the NIC at a lower level and asks it to hand over a copy of every packet passing through — not just packets meant for your process. That's what promiscuous mode means: the NIC normally filters out anything not addressed to it (by MAC address), and promiscuous mode tells it "stop filtering, give me everything you see, even traffic addressed to other d
-
-Phantom types are a design pattern where a type has a generic parameter that is not used in its fields. They exist only at compile-time to enforce type safety and state constraints without adding any memory or performance overhead at runtime.
+**Note**
+Why bother building it? Real talk -- it's not solving world hunger or cancer, it's a learning project. It forces you through actual Linux networking internals, Rust systems programming, and process/socket internals, stuff that pays off way beyond this one tool, especially with your Cisco/networking goals.
