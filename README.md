@@ -1,5 +1,6 @@
 # leech
-**what is leech?** <br>
+
+**What is leech**, in one sentence: A tool that watches your computer's network traffic and shows you, live, which apps are quietly talking to the internet and where.
 You know how your laptop is constantly "phoning home",  apps checking for updates, ads loading, some background service pinging a server you've never heard of? Right now, you have basically zero visibility into that. It's happening silently, all the time, and you'd need to be a network wizard to see it.
 leech is a live dashboard, right in your terminal, that shows you exactly that, in real time.
 
